@@ -1,29 +1,28 @@
 package org.example;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-import java.time.LocalDateTime;
-
+//Изучите внутреннюю реализацию класса StringBuilder и напишите свою с добавлением дополнительного метода - undo().
+//Прежде чем приступать - прочитайте про паттерн snapshot и примените его в своей реализации.
+//примечание: полностью переписывать все методы которые есть в StringBuilder не нужно, в задании важно именно понимание
+//сути паттерна. В случае, если задание остаётся непонятным, задайте вопрос ментору
 
 public class Main {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static void main(String[] args) throws JsonProcessingException {
 
-        LocalDateTime localDateTime = LocalDateTime.now();
-        String result = parseDate(localDateTime);
-        System.out.println(result);
+    public static void main(String[] args) {
+
+        CustomStringBuilder customStringBuilder = new CustomStringBuilder();
+        customStringBuilder.append("abc");
+        System.out.println(customStringBuilder);
+        customStringBuilder.append("-cba");
+        System.out.println(customStringBuilder);
+        customStringBuilder.undo();
+        System.out.println(customStringBuilder);
+        customStringBuilder.undo();
+        System.out.println(customStringBuilder);
+
     }
 
-    public static String parseDate(LocalDateTime localDateTime) throws JsonProcessingException {
-        objectMapper.registerModule(new JavaTimeModule());
-        return objectMapper.writeValueAsString(localDateTime)
-                .replace(",",":")
-                .replace("[","")
-                .replace("]","");
-    }
+
 
 }
