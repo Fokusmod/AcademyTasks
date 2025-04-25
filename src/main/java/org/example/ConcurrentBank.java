@@ -25,7 +25,7 @@ public class ConcurrentBank {
 
     public int getTotalBalance() {
         AtomicInteger total = new AtomicInteger();
-        for (Map.Entry<String, BankAccount> entry : accountStorage.entrySet()) {
+        for (Map.Entry<AtomicInteger, BankAccount> entry : accountStorage.entrySet()) {
             total.addAndGet(entry.getValue().getBalance());
         }
         return total.get();
