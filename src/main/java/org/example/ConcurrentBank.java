@@ -2,13 +2,14 @@ package org.example;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ConcurrentBank {
 
     private AtomicInteger count = new AtomicInteger(0);
 
-    private final Map<String,BankAccount> accountStorage = new HashMap<>();
+    private final ConcurrentHashMap<String,BankAccount> accountStorage = new ConcurrentHashMap<>();
 
 
     public BankAccount createAccount(int count) {
