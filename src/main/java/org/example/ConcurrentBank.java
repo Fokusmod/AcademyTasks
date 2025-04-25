@@ -9,12 +9,12 @@ public class ConcurrentBank {
 
     private AtomicInteger count = new AtomicInteger(0);
 
-    private final ConcurrentHashMap<String,BankAccount> accountStorage = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<AtomicInteger,BankAccount> accountStorage = new ConcurrentHashMap<>();
 
 
     public BankAccount createAccount(int count) {
         BankAccount account = new BankAccount(this.count.incrementAndGet(), count);
-        accountStorage.put(String.valueOf(account.getId()),account);
+        accountStorage.put(new AtomicInteger(this.count.get()),account);
         return account;
     }
 
